@@ -11,9 +11,14 @@ export default defineConfig({
       fileName: () => 'my-widget.es.js'
     },
     rollupOptions: {
-      // 不特別 externalize，讓 Vue 一併被打包到輸出檔（簡單做法）
-      // 如果你想外部化 Vue（不把 Vue 包進去），可把 'vue' 加到 external 並再改消費方用法（見下）
-      external: []
-    }
-  }
+      external: [],
+      output: {
+        inlineDynamicImports: true, // 確保單檔輸出
+      },
+    },
+  },
+  define: {
+    // ✅ 把 process.env.NODE_ENV 直接替換成 'production'
+    'process.env.NODE_ENV': JSON.stringify('production'),
+  }, 
 })
