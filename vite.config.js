@@ -3,22 +3,27 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue({ customElement: true })], // 若要打包成 Web Component 建議加這個
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/entry.js'), // 下面會建立
+      entry: path.resolve(__dirname, 'src/entry.js'),
       formats: ['es'],
-      fileName: () => 'my-widget.es.js'
+      fileName: () => 'base-button.es.js',
     },
     rollupOptions: {
-      external: [],
+      // ⛔ 不要打包 vue、element-plus、icons-vue
+      external: ['vue', 'element-plus', '@element-plus/icons-vue'],
       output: {
         inlineDynamicImports: true, // 確保單檔輸出
+        globals: {
+          vue: 'Vue',
+          'element-plus': 'ElementPlus',
+          '@element-plus/icons-vue': 'ElementPlusIconsVue',
+        },
       },
     },
   },
   define: {
-    // ✅ 把 process.env.NODE_ENV 直接替換成 'production'
     'process.env.NODE_ENV': JSON.stringify('production'),
-  }, 
+  },
 })
