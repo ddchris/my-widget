@@ -1,3 +1,4 @@
+// vite.config.js
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
@@ -6,8 +7,8 @@ export default defineConfig({
   plugins: [vue({ customElement: true })],
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/BaseButton.vue'),
-      formats: ['iife'],        // ❌ 改成 IIFE，瀏覽器可直接用 window.Vue
+      entry: path.resolve(__dirname, 'src/entry.js'), // 指向 entry.js
+      formats: ['iife'],       // IIFE 格式讓瀏覽器直接讀 window.Vue
       name: 'BaseButton',
       fileName: () => 'base-button.js',
     },
@@ -15,9 +16,9 @@ export default defineConfig({
       external: ['vue', 'element-plus', '@element-plus/icons-vue'],
       output: {
         globals: {
-          vue: 'Vue',                   // 從 window.Vue 取得
-          'element-plus': 'ElementPlus',// 從 window.ElementPlus 取得
-          '@element-plus/icons-vue': 'ElementPlusIconsVue', // 從 window.ElementPlusIconsVue
+          vue: 'Vue',
+          'element-plus': 'ElementPlus',
+          '@element-plus/icons-vue': 'ElementPlusIconsVue',
         },
       },
     },
