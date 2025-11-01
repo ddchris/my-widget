@@ -21,3 +21,7 @@ defineEmits(['click'])
     <slot/>
   </ElButton>
 </template>
+
+<style>
+@import "element-plus/theme-chalk/el-button.css"; /* 直接 import 本地 CSS */
+</style>

@@ -4,7 +4,7 @@ import BaseButton from './components/BaseButton.vue'
 import 'element-plus/theme-chalk/el-button.css'
 
 // 把 SFC 轉成 custom element constructor
-const BaseButtonElement = defineCustomElement({...BaseButton, shadow: false})
+const BaseButtonElement = defineCustomElement({...BaseButton, shadow: true})
 // 註冊 custom element（tag name 必須含有 -）
 if (!customElements.get('base-button')) {
   customElements.define('base-button', BaseButtonElement)
