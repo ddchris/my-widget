@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { ElButton, ElIcon } from 'element-plus'
-import { Loading } from '@element-plus/icons-vue'
-import 'element-plus/es/components/button/style/css'
-import 'element-plus/es/components/icon/style/css'
+const { ElButton, ElIcon } = window.ElementPlus;
+const { Loading } = window.ElementPlusIconsVue
 
 defineProps<{
   type?: string
