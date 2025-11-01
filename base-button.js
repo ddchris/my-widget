@@ -1,1 +1,1 @@
-(function(){"use strict";const{defineCustomElement:e}=window.Vue,{ElButton:t}=window.ElementPlus,n=e({props:["label"],render(){return window.Vue.h(t,{},{default:()=>this.label})}});customElements.define("base-button",n)})();
+(function(){"use strict";const{defineCustomElement:e}=window.Vue,{ElButton:n}=window.ElementPlus,t=e({props:["label","type","loading","icon"],render(){return window.Vue.h(window.ElementPlus.ElButton,{},{default:()=>this.label})},shadow:!1});customElements.define("base-button",t)})();
