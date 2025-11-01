@@ -9,12 +9,11 @@ defineProps<{
   loading?: boolean
   icon?: any
 }>()
-
-defineEmits(['click'])
 </script>
 
 <template>
-  <ElButton :class="class" :type="type" :disabled="loading">
+  // 事件觸發兩次不是 原生 click + Vue CE 事件冒泡同時觸發,所以用 @click.native.stop 停止冒泡
+  <ElButton @click="$emit('click')" :class="class" :type="type" :disabled="loading" @click.native.stop="$emit('click')" >
     <ElIcon v-if="loading"><Loading class="animate-spin" /></ElIcon>
     <ElIcon v-else-if="icon"><component :is="icon" /></ElIcon>
     {{ message }}
