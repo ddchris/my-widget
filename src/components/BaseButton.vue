@@ -4,6 +4,8 @@ const { Loading } = window.ElementPlusIconsVue
 
 defineProps<{
   type?: string
+  class?: string
+  message?: string
   loading?: boolean
   icon?: any
 }>()
@@ -12,9 +14,10 @@ defineEmits(['click'])
 </script>
 
 <template>
-  <ElButton :type="type" :disabled="loading" @click="$emit('click')">
+  <ElButton :class="class" :type="type" :disabled="loading" @click="$emit('click')">
     <ElIcon v-if="loading"><Loading class="animate-spin" /></ElIcon>
     <ElIcon v-else-if="icon"><component :is="icon" /></ElIcon>
-    <slot />
+    {{ message }}
+    <slot/>
   </ElButton>
 </template>

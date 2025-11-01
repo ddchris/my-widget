@@ -1,6 +1,7 @@
 const { defineCustomElement } = window.Vue
 
 import BaseButton from './components/BaseButton.vue'
+import 'element-plus/theme-chalk/el-button.css'
 
 // 把 SFC 轉成 custom element constructor
 const BaseButtonElement = defineCustomElement({...BaseButton, shadow: false})
