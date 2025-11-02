@@ -44,4 +44,14 @@ const loadingBool = computed(() => props.loading === true || props.loading === '
 <style>
 @import "element-plus/theme-chalk/el-button.css";
 @import "element-plus/theme-chalk/el-icon.css";
+
+/* Tailwind animate-spin 自訂版 */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
 </style>
