@@ -6,6 +6,13 @@
 import { build } from 'vite'
 import path from 'path'
 
+// package.json "type": "module" → Node 會把 .js 當成 ES Module
+// ES Module 沒有 __dirname（它是 CommonJS 專屬）
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
 const components = [
   {
     name: 'base-button',
