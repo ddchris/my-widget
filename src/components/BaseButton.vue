@@ -1,9 +1,11 @@
 <script setup lang="ts">
-const { computed } = window.Vue;
-const { ElButton, ElIcon } = window.ElementPlus;
-const { Loading } = window.ElementPlusIconsVue
+const { computed, h } = window.Vue
+const { ElButton, ElIcon } = window.ElementPlus
+const { Loading, Edit, Delete, Lock, Plus, Search } = window.ElementPlusIconsVue
 
-// ✅ 應該這樣接住 props：
+// 你可根據需求擴充這個 icon 對照表
+const iconMap = { Loading, Edit, Delete, Lock, Plus, Search }
+
 const props = defineProps<{
   type?: string
   class?: string
@@ -12,20 +14,45 @@ const props = defineProps<{
   icon?: any
 }>()
 
-// ✅ 改用 props.xxx
+const emit = defineEmits(['click'])
+
 const loadingBool = computed(() => props.loading === true || props.loading === 'true')
 
+// ✅ 自動解析 icon
+const resolvedIcon = computed(() => {
+  // 若是字串，從 ElementPlusIconsVue 中查找
+  if (typeof props.icon === 'string') {
+    return iconMap[props.icon] || null
+  }
+  // 若是物件 (例如直接傳入 Edit component)
+  if (typeof props.icon === 'object' || typeof props.icon === 'function') {
+    return props.icon
+  }
+  return null
+})
 </script>
 
 <template>
-  <!-- 事件觸發兩次不是 原生 click + Vue CE 事件冒泡同時觸發,所以用 @click.native.stop 停止冒泡 -->
-  <ElButton :class="props.class" :type="props.type" :disabled="loadingBool" @click.native.stop="$emit('click')" >
+  <ElButton
+    :class="props.class"
+    :type="props.type"
+    :disabled="loadingBool"
+    @click.native.stop="emit('click')"
+  >
+    <!-- Loading 狀態 -->
     <ElIcon v-if="loadingBool"><Loading class="animate-spin" /></ElIcon>
-    <ElIcon v-else-if="props.icon"><component :is="props.icon" /></ElIcon>
+
+    <!-- 有 icon -->
+    <ElIcon v-else-if="resolvedIcon">
+      <component :is="resolvedIcon" />
+    </ElIcon>
+
+    <!-- 顯示名稱 -->
     {{ loadingBool ? '' : props.name }}
   </ElButton>
 </template>
 
 <style>
-@import "element-plus/theme-chalk/el-button.css"; /* 直接 import 本地 CSS */
+@import "element-plus/theme-chalk/el-button.css";
+@import "element-plus/theme-chalk/el-icon.css";
 </style>
