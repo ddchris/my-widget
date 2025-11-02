@@ -1,10 +1,8 @@
 <script setup lang="ts">
 const { computed, h } = window.Vue
 const { ElButton, ElIcon } = window.ElementPlus
-const { Loading, Edit, Delete, Lock, Plus, Search } = window.ElementPlusIconsVue
+const { Loading } = window.ElementPlusIconsVue
 
-// 你可根據需求擴充這個 icon 對照表
-const iconMap = { Loading, Edit, Delete, Lock, Plus, Search }
 
 const props = defineProps<{
   type?: string
@@ -22,17 +20,19 @@ const loadingBool = computed(() => props.loading === true || props.loading === '
 </script>
 
 <template>
+  <!-- .stop 就是為了阻止 Element Plus 內部事件再往上冒泡
+  這樣外層就不會收到重複事件 -->
   <ElButton
     :class="props.class"
     :type="props.type"
     :disabled="loadingBool"
-    @click.native.stop="emit('click')"
+    @click.stop="emit('click')"
   >
     <!-- Loading 狀態 -->
     <ElIcon v-if="loadingBool"><Loading class="animate-spin" /></ElIcon>
 
     <!-- 有 icon -->
-    <ElIcon v-else-if="props.icon">
+    <ElIcon v-else-if="props.icon" class="icon">
       <component :is="props.icon" />
     </ElIcon>
 
@@ -53,5 +53,8 @@ const loadingBool = computed(() => props.loading === true || props.loading === '
 
 .animate-spin {
   animation: spin 1s linear infinite;
+}
+.icon {
+  margin-right: 0.5em;
 }
 </style>
