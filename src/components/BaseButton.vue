@@ -3,7 +3,8 @@ const { computed } = window.Vue;
 const { ElButton, ElIcon } = window.ElementPlus;
 const { Loading } = window.ElementPlusIconsVue
 
-defineProps<{
+// ✅ 應該這樣接住 props：
+const props = defineProps<{
   type?: string
   class?: string
   message?: string
@@ -11,7 +12,9 @@ defineProps<{
   icon?: any
 }>()
 
+// ✅ 改用 props.xxx
 const loadingBool = computed(() => props.loading === true || props.loading === 'true')
+
 </script>
 
 <template>
