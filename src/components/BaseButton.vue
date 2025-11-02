@@ -1,14 +1,14 @@
 <script setup lang="ts">
-const { computed } = window.Vue
-const { ElButton, ElIcon } = window.ElementPlus
-const { Loading } = window.ElementPlusIconsVue
+const { computed } = (window as any).Vue
+const { ElButton, ElIcon } = (window as any).ElementPlus
+const { Loading } = (window as any).ElementPlusIconsVue
 
 
 const props = defineProps<{
   type?: string
   class?: string
   name?: string
-  loading?: boolean
+  loading?: boolean | string
   icon?: any
 }>()
 

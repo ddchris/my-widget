@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const { computed } = window.Vue
-const { ElInput, ElIcon } = window.ElementPlus
+const { computed } = (window as any).Vue
+const { ElInput, ElIcon } = (window as any).ElementPlus
 
 
 const props = defineProps<{
