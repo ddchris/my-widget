@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { computed, h } = window.Vue
+const { computed } = window.Vue
 const { ElButton, ElIcon } = window.ElementPlus
 const { Loading } = window.ElementPlusIconsVue
 

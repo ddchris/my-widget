@@ -5,6 +5,7 @@
 // 用多個 vite config 也可以，但需要每次打包多次
 import { build } from 'vite'
 import path from 'path'
+import vue from '@vitejs/plugin-vue'
 
 // package.json "type": "module" → Node 會把 .js 當成 ES Module
 // ES Module 沒有 __dirname（它是 CommonJS 專屬）
@@ -25,7 +26,7 @@ const components = [
     globalName: 'BaseInput'
   },
   {
-    name: 'all',
+    name: 'base-all',
     entry: path.resolve(__dirname, 'src/base-all.js'),
     globalName: 'MyComponents'
   }
@@ -34,7 +35,7 @@ const components = [
 async function buildComponent({ name, entry, globalName }) {
   console.log(`\nBuilding ${name}...`)
   await build({
-    plugins: [],
+    plugins: [vue({ customElement: true })],
     build: {
       lib: {
         entry,
