@@ -7,7 +7,7 @@ const { Loading } = window.ElementPlusIconsVue
 const props = defineProps<{
   type?: string
   class?: string
-  message?: string
+  name?: string
   loading?: boolean
   icon?: any
 }>()
@@ -22,8 +22,7 @@ const loadingBool = computed(() => props.loading === true || props.loading === '
   <ElButton :class="class" :type="type" :disabled="loadingBool" @click.native.stop="$emit('click')" >
     <ElIcon v-if="loading"><Loading class="animate-spin" /></ElIcon>
     <ElIcon v-else-if="icon"><component :is="icon" /></ElIcon>
-    {{ message }}
-    <slot/>
+    {{ name }}
   </ElButton>
 </template>
 
