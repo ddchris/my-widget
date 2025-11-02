@@ -19,10 +19,10 @@ const loadingBool = computed(() => props.loading === true || props.loading === '
 
 <template>
   <!-- 事件觸發兩次不是 原生 click + Vue CE 事件冒泡同時觸發,所以用 @click.native.stop 停止冒泡 -->
-  <ElButton :class="class" :type="type" :disabled="loadingBool" @click.native.stop="$emit('click')" >
+  <ElButton :class="props.class" :type="props.type" :disabled="loadingBool" @click.native.stop="$emit('click')" >
     <ElIcon v-if="loadingBool"><Loading class="animate-spin" /></ElIcon>
-    <ElIcon v-else-if="icon"><component :is="icon" /></ElIcon>
-    {{ loadingBool ? '' : name }}
+    <ElIcon v-else-if="props.icon"><component :is="props.icon" /></ElIcon>
+    {{ loadingBool ? '' : props.name }}
   </ElButton>
 </template>
 
