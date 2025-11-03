@@ -13,7 +13,6 @@ const components = [
   { name: 'base-pagination', entry: path.resolve(__dirname, 'src/base-pagination.js'), globalName: 'BasePagination' },
   { name: 'base-breadcrumb', entry: path.resolve(__dirname, 'src/base-breadcrumb.js'), globalName: 'BaseBreadcrumb' },
   { name: 'base-tabs', entry: path.resolve(__dirname, 'src/base-tabs.js'), globalName: 'BaseTabs' },
-  { name: 'base-date-picker', entry: path.resolve(__dirname, 'src/base-date-picker.js'), globalName: 'BaseDatePicker' },
   { name: 'base-date-time-picker', entry: path.resolve(__dirname, 'src/base-date-time-picker.js'), globalName: 'BaseDateTimePicker' },
   { name: 'base-tooltip', entry: path.resolve(__dirname, 'src/base-tooltip.js'), globalName: 'BaseTooltip' },
   { name: 'base-message', entry: path.resolve(__dirname, 'src/base-message.js'), globalName: 'BaseMessage' },

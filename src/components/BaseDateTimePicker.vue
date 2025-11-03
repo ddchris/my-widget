@@ -8,3 +8,11 @@ const emit = defineEmits(['update:modelValue']);
 <template>
   <ElDateTimePicker v-model="props.modelValue" @update:modelValue="emit('update:modelValue')" />
 </template>
+
+<style>
+@import "element-plus/theme-chalk/el-date-picker-panel.css";
+</style>
+
+
+
+el-date-picker-panel.css

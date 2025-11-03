@@ -6,8 +6,8 @@ const props = defineProps<{
   placeholder?: string
   disabled?: boolean | string
   clearable?: boolean | string
-  prefixIcon?: string
-  suffixIcon?: string
+  prefixIcon?: any
+  suffixIcon?: any
   type?: string
 }>()
 
@@ -27,6 +27,7 @@ onMounted(() => {
   if (inputEl) {
     inputEl.addEventListener('input', (e: Event) => {
       const target = e.target as HTMLInputElement
+      console.log('update:modelValue', target.value)
       emit('update:modelValue', target.value) // 更新宿主 Vue 的值
     })
   }
@@ -35,14 +36,11 @@ onMounted(() => {
 
 <template>
   <ElInput
-    :model-value="inputValue"  <!-- 直接綁定 modelValue -->
+    :model-value="inputValue"
     :placeholder="props.placeholder"
     :disabled="props.disabled"
     :clearable="props.clearable"
     :type="props.type"
-    @focus="emit('focus')" 
-    @blur="emit('blur')" 
-    @change="emit('change')"
   >
     <!-- 前置 icon -->
     <template #prefix v-if="props.prefixIcon">
