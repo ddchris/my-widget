@@ -26,7 +26,7 @@ const clearableBool = computed(() => props.clearable === true || props.clearable
     :disabled="disabledBool"
     :clearable="clearableBool"
     :type="props.type"
-    @update:modelValue="val => emit('update:modelValue', val)"  <!-- 確保更新 -->
+    @update:modelValue="val => emit('update:modelValue', val)"
     @focus="emit('focus')"
     @blur="emit('blur')"
     @change="emit('change')"
