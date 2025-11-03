@@ -1,3 +1,4 @@
+// BaseButton.js
 const { defineCustomElement } = window.Vue
 
 import BaseButton from './components/BaseButton.vue'

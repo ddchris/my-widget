@@ -1,3 +1,4 @@
+// BaseInput.js
 const { defineCustomElement } = window.Vue
 
 import BaseInput from './components/BaseInput.vue'

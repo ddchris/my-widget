@@ -1,3 +1,4 @@
+<!-- src/components/BaseInput.vue -->
 <script setup lang="ts">
 const { computed } = (window as any).Vue
 const { ElInput, ElIcon } = (window as any).ElementPlus

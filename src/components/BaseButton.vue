@@ -1,3 +1,4 @@
+<!-- src/components/BaseButton.vue -->
 <script setup lang="ts">
 const { computed } = (window as any).Vue
 const { ElButton, ElIcon } = (window as any).ElementPlus

@@ -1,35 +1,23 @@
-// 自訂 build 腳本
-// 遍歷多個元件 entry，自動 build
-// 每個元件都可單獨設定 name、fileName、globalName
-// 控制輸出到同一個 dist
-// 用多個 vite config 也可以，但需要每次打包多次
 import { build } from 'vite'
 import path from 'path'
 import vue from '@vitejs/plugin-vue'
-
-// package.json "type": "module" → Node 會把 .js 當成 ES Module
-// ES Module 沒有 __dirname（它是 CommonJS 專屬）
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const components = [
-  {
-    name: 'base-button',
-    entry: path.resolve(__dirname, 'src/base-button.js'),
-    globalName: 'BaseButton'
-  },
-  {
-    name: 'base-input',
-    entry: path.resolve(__dirname, 'src/base-input.js'),
-    globalName: 'BaseInput'
-  },
-  {
-    name: 'base-all',
-    entry: path.resolve(__dirname, 'src/base-all.js'),
-    globalName: 'MyComponents'
-  }
+  { name: 'base-button', entry: path.resolve(__dirname, 'src/base-button.js'), globalName: 'BaseButton' },
+  { name: 'base-input', entry: path.resolve(__dirname, 'src/base-input.js'), globalName: 'BaseInput' },
+  { name: 'base-all', entry: path.resolve(__dirname, 'src/base-all.js'), globalName: 'MyComponents' },
+  { name: 'base-pagination', entry: path.resolve(__dirname, 'src/base-pagination.js'), globalName: 'BasePagination' },
+  { name: 'base-breadcrumb', entry: path.resolve(__dirname, 'src/base-breadcrumb.js'), globalName: 'BaseBreadcrumb' },
+  { name: 'base-tabs', entry: path.resolve(__dirname, 'src/base-tabs.js'), globalName: 'BaseTabs' },
+  { name: 'base-date-picker', entry: path.resolve(__dirname, 'src/base-date-picker.js'), globalName: 'BaseDatePicker' },
+  { name: 'base-date-time-picker', entry: path.resolve(__dirname, 'src/base-date-time-picker.js'), globalName: 'BaseDateTimePicker' },
+  { name: 'base-tooltip', entry: path.resolve(__dirname, 'src/base-tooltip.js'), globalName: 'BaseTooltip' },
+  { name: 'base-message', entry: path.resolve(__dirname, 'src/base-message.js'), globalName: 'BaseMessage' },
+  { name: 'base-message-box', entry: path.resolve(__dirname, 'src/base-message-box.js'), globalName: 'BaseMessageBox' },
 ]
 
 async function buildComponent({ name, entry, globalName }) {
@@ -41,7 +29,7 @@ async function buildComponent({ name, entry, globalName }) {
         entry,
         name: globalName,
         formats: ['iife'],
-        fileName: () => `${name}.js`
+        fileName: () => `${name}.js`,
       },
       rollupOptions: {
         external: ['vue', 'element-plus', '@element-plus/icons-vue'],
