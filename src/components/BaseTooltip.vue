@@ -1,4 +1,4 @@
-<!-- Tooltip.vue -->
+<!-- BaseTooltip.vue -->
 <script setup lang="ts">
 const { ElTooltip } = (window as any).ElementPlus;
 const props = defineProps<{ content: string; placement?: string }>();

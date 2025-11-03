@@ -1,4 +1,4 @@
-<!-- Message.vue -->
+<!-- BaseMessage.vue -->
 <script setup lang="ts">
 const { ElMessage } = (window as any).ElementPlus;
 const props = defineProps<{

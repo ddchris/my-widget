@@ -1,4 +1,4 @@
-<!-- DateTimePicker.vue -->
+<!-- BaseDateTimePicker.vue -->
 <script setup lang="ts">
 const { ElDateTimePicker } = (window as any).ElementPlus;
 const props = defineProps<{ modelValue: string | Date }>();

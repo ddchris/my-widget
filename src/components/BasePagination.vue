@@ -1,4 +1,4 @@
-<!-- Pagination.vue -->
+<!-- BasePagination.vue -->
 <script setup lang="ts">
 const { ElPagination } = (window as any).ElementPlus;
 

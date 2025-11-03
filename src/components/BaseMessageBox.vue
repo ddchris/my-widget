@@ -1,4 +1,4 @@
-<!-- MessageBox.vue -->
+<!-- BaseMessageBox.vue -->
 <script setup lang="ts">
 const { ElMessageBox } = (window as any).ElementPlus;
 const props = defineProps<{

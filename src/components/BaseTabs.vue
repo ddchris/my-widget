@@ -1,4 +1,4 @@
-<!-- Tabs.vue -->
+<!-- BaseTabs.vue -->
 <script setup lang="ts">
 const { ElTabs, ElTabPane } = (window as any).ElementPlus;
 const props = defineProps<{
