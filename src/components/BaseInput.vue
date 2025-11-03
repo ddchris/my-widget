@@ -1,8 +1,6 @@
-<!-- src/components/BaseInput.vue -->
 <script setup lang="ts">
 const { computed } = (window as any).Vue
 const { ElInput, ElIcon } = (window as any).ElementPlus
-
 
 const props = defineProps<{
   modelValue?: string | number
@@ -22,18 +20,16 @@ const clearableBool = computed(() => props.clearable === true || props.clearable
 </script>
 
 <template>
-  <!-- .stop 就是為了阻止 Element Plus 內部事件再往上冒泡
-  這樣外層就不會收到重複事件 -->
   <ElInput
     :model-value="props.modelValue"
     :placeholder="props.placeholder"
     :disabled="disabledBool"
     :clearable="clearableBool"
     :type="props.type"
-    @update:modelValue.stop="val => emit('update:modelValue', val)"
-    @focus.stop="emit('focus')"
-    @blur.stop="emit('blur')"
-    @change.stop="emit('change')"
+    @update:modelValue="val => emit('update:modelValue', val)"  <!-- 確保更新 -->
+    @focus="emit('focus')"
+    @blur="emit('blur')"
+    @change="emit('change')"
   >
     <!-- 前置 icon -->
     <template #prefix v-if="props.prefixIcon">
