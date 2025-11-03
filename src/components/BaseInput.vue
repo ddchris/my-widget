@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const { computed } = (window as any).Vue
-const { ElInput, ElIcon } = (window as any).ElementPlus
+import { ref, watch, defineProps, defineEmits, onMounted } from 'vue'
 
 const props = defineProps<{
   modelValue?: string | number
@@ -14,21 +13,35 @@ const props = defineProps<{
 
 const emit = defineEmits(['update:modelValue', 'focus', 'blur', 'change'])
 
-// 把字串 'true' 也視為 true
-const disabledBool = computed(() => props.disabled === true || props.disabled === 'true')
-const clearableBool = computed(() => props.clearable === true || props.clearable === 'true')
+// 當 modelValue 改變時，更新本地值
+const inputValue = ref(props.modelValue)
+
+// 監聽 modelValue 變化，並同步更新
+watch(() => props.modelValue, (newValue) => {
+  inputValue.value = newValue
+})
+
+onMounted(() => {
+  // 綁定輸入事件，當值改變時發送 update:modelValue 事件
+  const inputEl = document.querySelector('input')
+  if (inputEl) {
+    inputEl.addEventListener('input', (e: Event) => {
+      const target = e.target as HTMLInputElement
+      emit('update:modelValue', target.value) // 更新宿主 Vue 的值
+    })
+  }
+})
 </script>
 
 <template>
   <ElInput
-    :model-value="props.modelValue"
+    :model-value="inputValue"  <!-- 直接綁定 modelValue -->
     :placeholder="props.placeholder"
-    :disabled="disabledBool"
-    :clearable="clearableBool"
+    :disabled="props.disabled"
+    :clearable="props.clearable"
     :type="props.type"
-    @update:modelValue="val => emit('update:modelValue', val)"
-    @focus="emit('focus')"
-    @blur="emit('blur')"
+    @focus="emit('focus')" 
+    @blur="emit('blur')" 
     @change="emit('change')"
   >
     <!-- 前置 icon -->
