@@ -4,6 +4,7 @@ import BaseButton from './components/BaseButton.vue';
 import BaseInput from './components/BaseInput.vue';
 import BasePagination from './components/BasePagination.vue';
 import BaseBreadcrumb from './components/BaseBreadcrumb.vue';
+import BaseTabs from './components/BaseTabs.vue';
 import BaseDateTimePicker from './components/BaseDateTimePicker.vue';
 import BaseTooltip from './components/BaseTooltip.vue';
 import BaseMessage from './components/BaseMessage.vue';
@@ -41,7 +42,7 @@ if (!customElements.get('base-pagination')) {
   customElements.define('base-pagination', BasePaginationElement);
 }
 if (!customElements.get('base-breadcrumb')) {
-  customElements.define('base-breadcrumb', BreadcrumbElement);
+  customElements.define('base-breadcrumb', BaseBreadcrumbElement);
 }
 if (!customElements.get('base-tabs')) {
   customElements.define('base-tabs', BaseTabsElement);
