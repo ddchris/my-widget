@@ -6,30 +6,34 @@ const { ref, computed, defineProps, defineEmits, defineModel } = (window as any)
 /* eslint-disable */
 /* prettier-ignore */
 const props = defineProps<{
-  modelValue?: string | number
   placeholder?: string
   disabled?: boolean | string
   clearable?: boolean | string
   prefixIcon?: any
   suffixIcon?: any
-  type?: string
+  type?: string,
+  readonly?: string | number
 }>()
 
-const emit = defineEmits(['update:modelValue', 'focus', 'blur', 'change']) // 增加 update:modelValue 事件
+const emit = defineEmits(['focus', 'blur', 'change']) // 增加 update:modelValue 事件
 
+// 使用 defineModel 來處理 v-model 綁定
+const model = defineModel(props.modelValue)
 
 // 计算 clearable 和 disabled 的布尔值
 const clearableBool = computed(() => props.clearable === true || props.clearable === 'true')
 const disabledBool = computed(() => props.disabled === true || props.disabled === 'true')
+const readonlyBool = computed(() => props.readonly === true || props.readonly === 'true')
 </script>
 
 <template>
   <ElInput
-    v-model="props.modelValue"
+    v-model="model"
     :placeholder="props.placeholder"
     :disabled="disabledBool"
     :clearable="clearableBool"
     :type="props.type"
+    :readonly="readonlyBool"
     >
     <!-- 前置 icon -->
     <template #prefix v-if="props.prefixIcon">
