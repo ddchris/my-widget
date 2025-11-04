@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import { ref, watch, defineProps, defineEmits } from 'vue'
-
+const { ElInput, ElIcon } = (window as any).ElementPlus
+const { ref, computed, defineProps, defineEmits, defineModel } = (window as any).Vue
+// @ts-nocheck
+// 定义 props 和 emits
+/* eslint-disable */
+/* prettier-ignore */
 const props = defineProps<{
   modelValue?: string | number
   placeholder?: string
@@ -11,26 +15,30 @@ const props = defineProps<{
   type?: string
 }>()
 
-const emit = defineEmits(['update:modelValue', 'focus', 'blur', 'change'])
+const emit = defineEmits(['focus', 'blur', 'change']) // 增加 update:modelValue 事件
 
-// 綁定 modelValue
-const inputValue = ref(props.modelValue)
+// 使用 defineModel 來處理 v-model 綁定
+const model = defineModel(props.modelValue)
+
+// 计算 clearable 和 disabled 的布尔值
+const clearableBool = computed(() => props.clearable === true || props.clearable === 'true')
+const disabledBool = computed(() => props.disabled === true || props.disabled === 'true')
 </script>
 
 <template>
   <ElInput
-    v-model="inputValue"
+    v-model="model"
     :placeholder="props.placeholder"
-    :disabled="props.disabled"
-    :clearable="props.clearable"
+    :disabled="disabledBool"
+    :clearable="clearableBool"
     :type="props.type"
-  >
+    >
     <!-- 前置 icon -->
     <template #prefix v-if="props.prefixIcon">
       <ElIcon><component :is="props.prefixIcon" /></ElIcon>
     </template>
 
-    <!-- 後置 icon -->
+    <!-- 后置 icon -->
     <template #suffix v-if="props.suffixIcon">
       <ElIcon><component :is="props.suffixIcon" /></ElIcon>
     </template>

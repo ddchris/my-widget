@@ -47,14 +47,11 @@ if (!customElements.get('base-breadcrumb')) {
 if (!customElements.get('base-tabs')) {
   customElements.define('base-tabs', BaseTabsElement);
 }
-if (!customElements.get('base-date-picker')) {
-  customElements.define('base-date-picker', DatePickerElement);
-}
 if (!customElements.get('base-date-time-picker')) {
   customElements.define('base-date-time-picker', BaseDateTimePickerElement);
 }
 if (!customElements.get('base-tooltip')) {
-  customElements.define('base-tooltip', TooltipElement);
+  customElements.define('base-tooltip', BaseTooltipElement);
 }
 if (!customElements.get('base-message')) {
   customElements.define('base-message', BaseMessageElement);
@@ -67,10 +64,9 @@ if (!customElements.get('base-message-box')) {
 export default { 
   BaseButtonElement, 
   BaseInputElement, 
-  PaginationElement,
-  BreadcrumbElement, 
+  BasePaginationElement,
+  BaseBreadcrumbElement, 
   BaseTabsElement, 
-  BaseDatePickerElement,
   BaseDateTimePickerElement, 
   BaseTooltipElement, 
   BaseMessageElement, 
