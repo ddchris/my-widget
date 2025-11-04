@@ -18,7 +18,7 @@ const props = defineProps<{
 const emit = defineEmits(['focus', 'blur', 'change']) // 增加 update:modelValue 事件
 
 // 使用 defineModel 來處理 v-model 綁定
-const model = defineModel(props.modelValue)
+const model = defineModel()
 
 // 计算 clearable 和 disabled 的布尔值
 const clearableBool = computed(() => props.clearable === true || props.clearable === 'true')
