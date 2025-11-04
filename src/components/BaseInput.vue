@@ -15,10 +15,8 @@ const props = defineProps<{
   type?: string
 }>()
 
-const emit = defineEmits(['focus', 'blur', 'change']) // 增加 update:modelValue 事件
+const emit = defineEmits(['update:modelValue', 'focus', 'blur', 'change']) // 增加 update:modelValue 事件
 
-// 使用 defineModel 來處理 v-model 綁定
-const model = defineModel(props.modelValue)
 
 // 计算 clearable 和 disabled 的布尔值
 const clearableBool = computed(() => props.clearable === true || props.clearable === 'true')
@@ -27,7 +25,7 @@ const disabledBool = computed(() => props.disabled === true || props.disabled ==
 
 <template>
   <ElInput
-    v-model="model"
+    v-model="props.modelValue"
     :placeholder="props.placeholder"
     :disabled="disabledBool"
     :clearable="clearableBool"
