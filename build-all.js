@@ -1,12 +1,14 @@
 import { build } from 'vite'
 import path from 'path'
 import vue from '@vitejs/plugin-vue'
+import VueMacros from 'unplugin-vue-macros/vite' // 🚨 修正：導入 Vue Macros
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const components = [
+  // ... 保持不變
   { name: 'base-button', entry: path.resolve(__dirname, 'src/base-button.js'), globalName: 'BaseButton' },
   { name: 'base-input', entry: path.resolve(__dirname, 'src/base-input.js'), globalName: 'BaseInput' },
   { name: 'base-all', entry: path.resolve(__dirname, 'src/base-all.js'), globalName: 'MyComponents' },
@@ -21,8 +23,27 @@ const components = [
 
 async function buildComponent({ name, entry, globalName }) {
   console.log(`\nBuilding ${name}...`)
+  
+  // 🚨 修正：確保插件配置與您的 Vite 配置保持一致，以正確解析 SFC
+  const plugins = [
+    // 必須使用 VueMacros 來處理 <script setup lang="ts"> 和 defineModel
+    VueMacros({
+      defineOptions: false,
+      defineModels: false,
+      plugins: {
+        vue: vue({
+          customElement: true, // Web Component 模式
+          script: {
+            propsDestructure: true,
+            defineModel: true,
+          },
+        }),
+      },
+    }),
+  ];
+  
   await build({
-    plugins: [vue({ customElement: true })],
+    plugins, // 應用修正後的插件
     build: {
       lib: {
         entry,
@@ -31,8 +52,14 @@ async function buildComponent({ name, entry, globalName }) {
         fileName: () => `${name}.js`,
       },
       rollupOptions: {
-        external: ['vue', 'element-plus', '@element-plus/icons-vue'],
+        // 修正：加入所有外部依賴
+        external: [
+          'vue',
+          'element-plus',
+          '@element-plus/icons-vue',
+        ],
         output: {
+          // iife 格式下的全域變數名稱映射
           globals: {
             vue: 'Vue',
             'element-plus': 'ElementPlus',
